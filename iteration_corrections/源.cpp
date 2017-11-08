@@ -35,24 +35,7 @@ void iteration_corrections(double ** &A, double *&x, double *&b, int &n)
 
 	LU_decom(A, l, u, n);
 	x = Calc_X(l, u, b, n);
-	cout << "l:\n";
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			cout << l[i][j] << " ";
-		}
-		cout << endl;
-	}
-	cout << "u\n";
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			cout << u[i][j] << " ";
-		}
-		cout << endl;
-	}
+	
 	for (i = 0; i < MAX_TIMES; i++)
 	{
 
@@ -67,7 +50,7 @@ void iteration_corrections(double ** &A, double *&x, double *&b, int &n)
 		norm_d = max_element(d, n);
 
 		double min = fabs(norm_d / norm_x);
-		cout << "min = " << min << endl;
+
 		if (min < ERROR)
 		{
 			cout << "达到精确值\n";
@@ -77,7 +60,7 @@ void iteration_corrections(double ** &A, double *&x, double *&b, int &n)
 	cout << "迭代次数：" << i << endl;
 	if (i == MAX_TIMES)
 	{
-		cout << "达到最大迭代次数\n";
+		cout << "达到最大迭代次数," << i << "次\n";
 	}
 	cout << "x的值为：\n";
 	for (int i = 0; i <n; i++)
@@ -135,19 +118,20 @@ void scanf_data(double ** &A, double *&x, double *&b, int &n)
 		for (size_t j = 0; j < n; j++)
 		{
 			cin >> A[i][j];
+		//	A[i][j] = 1.0 / (i + 1 + j + 1);
 		}
 	}
 
-	//x = new double[n];
-	//cout << "请输入x初值:\n";
-	//for (size_t i = 0; i < n; i++)
-	//{
-	//	cin >> x[i];
-	//}
+	
 
 	cout << "请输入向量b:\n";
 	for (size_t i = 0; i < n; i++)
 	{
+		/*b[i] = 0;
+		for (int j = 0; j < n; j++)
+		{
+			b[i] += A[i][j];
+		}*/
 		cin >> b[i];
 	}
 }
